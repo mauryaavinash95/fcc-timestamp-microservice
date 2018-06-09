@@ -15,8 +15,18 @@ app.use(bodyParser.json())
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/:date_string", function (request, response) {
     let dateString = request.params.date_string;
-    
-    response.send({unix: , utc:   });
+    let utc, unix=Date.parse(dateString);
+    if(dateString){
+        if(unix!== NaN){
+            utc = new Date(dateString).toUTCString();      
+            response.send({utc, unix});
+        } else {
+            response.send({"error" : "Invalid Date" })
+        }
+    } else {
+         utc = new Date();
+         unix = utc.toString
+    }
 });
 
 // listen for requests :)

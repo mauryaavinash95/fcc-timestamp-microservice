@@ -12,15 +12,23 @@ var bodyParser = require('body-parser');
 app.use(express.static('public'));
 app.use(bodyParser.json())
 
+app.get("/", function(request, response){
+        let utc = new Date();
+        let unix = utc.toUTCString();
+        response.send({utc, unix});
+})
+
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/:date_string", function (request, response) {
     let dateString = request.params.date_string;
     let utc, unix=Date.parse(dateString);
     if(dateString){
         if(unix!== NaN){
+            console.log("Not in Nan");
             utc = new Date(dateString).toUTCString();      
             response.send({utc, unix});
         } else {
+            console.log("In else");
             response.send({"error" : "Invalid Date" })
         }
     } else {

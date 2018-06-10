@@ -25,7 +25,8 @@ app.get("/:date_string", function (request, response) {
         }
     } else {
          utc = new Date();
-         unix = utc.toString
+         unix = utc.toUTCString();
+         response.send({utc, unix});
     }
 });
 

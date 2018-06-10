@@ -23,7 +23,7 @@ app.get("/:date_string", function (request, response) {
     let dateString = request.params.date_string;
     let utc, unix=Date.parse(dateString);
     if(dateString){
-        if(unix!== NaN){
+        if(unix!== NaN && utc!=null){
             console.log("Not in Nan");
             utc = new Date(dateString).toUTCString();      
             response.send({utc, unix});
